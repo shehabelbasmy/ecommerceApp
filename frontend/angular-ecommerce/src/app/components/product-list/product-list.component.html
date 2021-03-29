@@ -1,0 +1,48 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div *ngFor="let tempProduct of products" class="col-md-3">
+                    <div class="product-box">
+                        <a routerLink="{{tempProduct.id}}">
+                            <img src="{{tempProduct.imageUrl}}" class="img-responsive" class="detail-img">
+                        </a>
+                        <a routerLink="{{tempProduct.id}}">
+                            <h1>{{tempProduct.name}}</h1>
+                        </a>
+                        <h2>{{tempProduct.description}}</h2>
+                        <div class="price">{{tempProduct.unitPrice | currency:'USD'}}</div>
+                        <button class="btn btn-primary btn-sm" (click)="addToCart(tempProduct)">Add to Cart</button>
+                    </div>
+                </div>
+                <div *ngIf="products?.length==0" role="alert" class="alert alert-warning col-md-12">
+                    No Product Found
+                </div>
+
+            </div>
+
+            <div class="footer-pagination">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ngb-pagination [(page)]="pageNumber" [pageSize]="pageSize" [maxSize]="5"
+                            [collectionSize]="totalElemnets" (pageChange)="listProducts()" [boundaryLinks]="true">
+                        
+                        </ngb-pagination>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="items">
+                            <label>Page Size</label>
+                            <select (change)="updatePageSize($event.target.value)">
+                                <option selected="true">10</option>
+                                <option>20</option>
+                                <option>30</option>
+                                <option>40</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
